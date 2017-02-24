@@ -15,10 +15,10 @@ import static com.vakhnenko.departments.utils.Arrays.*;
 public class DepartmentsApplication {
     private DepartmentService departmentService = new DepartmentService();
 
-    public DepartmentsApplication() throws SQLException {
+    protected DepartmentsApplication() throws Exception {
     }
 
-    public void run() throws IOException {
+    protected void run() throws Exception {
         String command;
 
         boolean noExit = true;
