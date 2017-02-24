@@ -3,7 +3,14 @@ package com.vakhnenko.departments;
 public class App {
 
     public static void main( String[] args ) throws InterruptedException {
-        DepartmentApplication departmentApplication = new DepartmentApplication();
-        departmentApplication.run();
+        DepartmentsApplication departments = new DepartmentsApplication();
+
+        try {
+            departments.run();
+        } catch (Exception e) {
+            System.out.println("Application error! " + e.getMessage());
+        } finally {
+            departments.done();
+        }
     }
 }
