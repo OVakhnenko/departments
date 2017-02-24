@@ -3,6 +3,7 @@ package com.vakhnenko.departments.utils;
 import java.io.*;
 import java.nio.charset.*;
 
+import static com.vakhnenko.departments.App.logger;
 import static com.vakhnenko.departments.utils.Constants.*;
 
 /**
@@ -16,7 +17,7 @@ abstract public class ConnectionUtilFile {
         try {
             result = new FileWriter(fileName, false);
         } catch (IOException e) {
-            System.out.println("Write error!");
+            logger.error("Write error!");
         }
         return result;
     }
@@ -29,7 +30,7 @@ abstract public class ConnectionUtilFile {
                     new InputStreamReader(
                             new FileInputStream(fileName), StandardCharsets.UTF_8));
         } catch (IOException e) {
-            System.out.println("Read error!");
+            logger.error("Read error!");
         }
         return result;
     }

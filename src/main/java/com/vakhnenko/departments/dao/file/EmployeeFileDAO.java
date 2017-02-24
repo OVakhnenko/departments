@@ -6,6 +6,7 @@ import com.vakhnenko.departments.entity.employee.*;
 import java.io.*;
 import java.util.List;
 
+import static com.vakhnenko.departments.App.logger;
 import static com.vakhnenko.departments.utils.Constants.*;
 
 /**
@@ -27,7 +28,7 @@ public class EmployeeFileDAO<T extends Employee> extends EmployeeDAO<T> {
             if (!methodology.equals("")) ((Manager) employee).setMethodology(methodology);
             if (!language.equals("")) ((Developer) employee).setLanguage(language);
         } else {
-            System.out.println("Error! Employee " + employeeName + " not founf!");
+            logger.warn("Error! Employee " + employeeName + " not founf!");
         }
     }
 
@@ -55,7 +56,7 @@ public class EmployeeFileDAO<T extends Employee> extends EmployeeDAO<T> {
                     writer.flush();
                     result = true;
                 } catch (IOException e) {
-                    System.out.println("Write error!");
+                    logger.error("Write error!");
                     result = false;
                 }
             }
@@ -67,7 +68,7 @@ public class EmployeeFileDAO<T extends Employee> extends EmployeeDAO<T> {
         try {
             writer.close();
         } catch (IOException e) {
-            System.out.println("Close file error!");
+            logger.error("Close file error!");
         }
     }
 }

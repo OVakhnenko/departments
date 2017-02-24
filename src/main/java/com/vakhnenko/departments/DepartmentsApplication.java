@@ -7,6 +7,7 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
 
+import static com.vakhnenko.departments.App.logger;
 import static com.vakhnenko.departments.utils.Constants.*;
 import static com.vakhnenko.departments.utils.PrintHelper.*;
 import static com.vakhnenko.departments.utils.Strings.*;
@@ -116,7 +117,7 @@ public class DepartmentsApplication {
                 readFromFile();
                 break;
             default:
-                System.out.println("Error! Unknown command - \"" + command + "\" type \"help\" for commands list");
+                logger.warn("Error! Unknown command - \"" + command + "\" type \"help\" for commands list");
         }
         return true;
     }
@@ -141,7 +142,7 @@ public class DepartmentsApplication {
             departmentService.createDepartment(name);
             departmentService.printAllDepartments();
         } else {
-            System.out.println("Error! Name is empty");
+            logger.warn("Error! Name is empty");
         }
     }
 
@@ -153,20 +154,20 @@ public class DepartmentsApplication {
         String employeeName = getStringFromManyWords(commands, positionOfKey);
 
         if (employeeName.equals("")) {
-            System.out.println("Error! Name is empty");
+            logger.warn("Error! Name is empty");
             return;
         }
 
         if (update) {
             if (!departmentService.employeeExists(employeeName)) {
-                System.out.println("The employee \"" + employeeName + "\" not found");
+                logger.warn("The employee \"" + employeeName + "\" not found");
                 return;
             } else {
                 type = departmentService.getTypeEmployee(employeeName);
             }
         } else {
             if (departmentService.employeeExists(employeeName)) {
-                System.out.println("The employee \"" + employeeName + "\" already exists");
+                logger.warn("The employee \"" + employeeName + "\" already exists");
                 return;
             }
             type = getKeyFromArray(commands, TYPE_EMPLOYEE_KEY);
@@ -177,11 +178,11 @@ public class DepartmentsApplication {
 
         if (!update) {
             if (departmentName.equals("")) {
-                System.out.println("Error! Department is empty");
+                logger.warn("Error! Department is empty");
                 return;
             }
             if (!departmentService.departmentExists(departmentName)) {
-                System.out.println("Error! Department not exists!");
+                logger.warn("Error! Department not exists!");
                 departmentService.printAllDepartments();
                 return;
             }
@@ -197,10 +198,10 @@ public class DepartmentsApplication {
         String methodology = getKeyFromArray(commands, METHODOLOGY_EMPLOYEE_KEY);
 
         if (type.equals(EMPLOYEE_MANAGER_TYPE) && (!(language.equals("")))) {
-            System.out.println("Error! The manager doesn’t have lenguage field");
+            logger.warn("Error! The manager doesn’t have lenguage field");
             return;
         } else if (type.equals(EMPLOYEE_DEVELOPER_TYPE) && (!(methodology.equals("")))) {
-            System.out.println("Error! The developer doesn’t have methodology field");
+            logger.warn("Error! The developer doesn’t have methodology field");
             return;
         }
 
@@ -220,7 +221,7 @@ public class DepartmentsApplication {
                 }
                 break;
             default:
-                System.out.println("Error! The unknown type of employee!");
+                logger.warn("Error! The unknown type of employee!");
         }
     }
 
@@ -287,7 +288,7 @@ public class DepartmentsApplication {
         if (!departmentName.equals("")) {
             departmentService.printAllEmployee(departmentName);
         } else {
-            System.out.println("Error! Name is empty");
+            logger.warn("Error! Name is empty");
         }
     }
 
@@ -320,7 +321,7 @@ public class DepartmentsApplication {
             }
             departmentService.printSearchedEmployeeAge(departmentName, age);
         } else {
-            System.out.println("Error! Unknown command - \" type \"help\" for commands list");
+            logger.warn("Error! Unknown command - \" type \"help\" for commands list");
         }
     }
 
@@ -328,7 +329,7 @@ public class DepartmentsApplication {
         String type = getKeyFromArray(commands, TYPE_EMPLOYEE_KEY);
 
         if (type.isEmpty()) {
-            System.out.println("Error! Unknown command - \" type \"help\" for commands list");
+            logger.warn("Error! Unknown command - \" type \"help\" for commands list");
         } else {
             departmentService.printTopEmployee(type);
         }

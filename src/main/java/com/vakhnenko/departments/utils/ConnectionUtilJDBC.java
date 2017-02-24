@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static com.vakhnenko.departments.App.logger;
 import static com.vakhnenko.departments.utils.Constants.*;
 
 public abstract class ConnectionUtilJDBC {
@@ -19,14 +20,14 @@ public abstract class ConnectionUtilJDBC {
         try {
             Class.forName(DB_DRIVER);
         } catch (ClassNotFoundException e) {
-            System.out.println("MySQL error! MySQL driver not found!");
+            logger.error("MySQL error! MySQL driver not found!");
             System.exit(DB_DRIVER_ERROR_EXIT_CODE);
         }
         try {
             dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
             return dbConnection;
         } catch (SQLException e) {
-            System.out.println("MySQL error! MySQL DB not connected!");
+            logger.error("MySQL error! MySQL DB not connected!");
             System.exit(DB_CONNECTION_ERROR_EXIT_CODE);
         }
         return dbConnection;
@@ -36,7 +37,7 @@ public abstract class ConnectionUtilJDBC {
         try {
             if (!(createMySQLDB(CREATE_DB_DEPARTMENT_IF_NOT_EXISTS, DEPARTMENT_TABLE_NAME)) ||
                     (!createMySQLDB(CREATE_DB_EMPLOYEE_IF_NOT_EXISTS, EMPLOYEE_TABLE_NAME))) {
-                System.out.println("MySQL error! Tables not created!");
+                logger.error("MySQL error! Tables not created!");
                 System.exit(DB_CREATE_ERROR_EXIT_CODE);
             }
         } catch (SQLException e) {
@@ -49,7 +50,7 @@ public abstract class ConnectionUtilJDBC {
         try {
             Connection dbConnection = getDBConnection();
             if (dbConnection == null) {
-                System.out.println("MySQL error! Connection is not established");
+                logger.error("MySQL error! Connection is not established");
             } else {
                 Statement statement = dbConnection.createStatement();
                 statement.execute(createStatement);
@@ -57,7 +58,7 @@ public abstract class ConnectionUtilJDBC {
                 result = true;
             }
         } catch (SQLException e) {
-            System.out.println("MySQL error! Table \"" + bdName + "\" not created!");
+            logger.error("MySQL error! Table \"" + bdName + "\" not created!");
         }
         return result;
     }
@@ -66,7 +67,7 @@ public abstract class ConnectionUtilJDBC {
         try {
             statement.execute(query);
         } catch (SQLException e) {
-            System.out.println("MySQL error! Record not inserted!");
+            logger.error("MySQL error! Record not inserted!");
         }
     }
 }

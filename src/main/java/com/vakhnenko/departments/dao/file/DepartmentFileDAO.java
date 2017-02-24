@@ -8,6 +8,7 @@ import com.vakhnenko.departments.utils.ConnectionUtilFile;
 import java.io.*;
 import java.util.*;
 
+import static com.vakhnenko.departments.App.logger;
 import static com.vakhnenko.departments.utils.Constants.*;
 
 /**
@@ -33,7 +34,7 @@ public class DepartmentFileDAO extends DepartmentDAO {
                     writer.flush();
                     result = true;
                 } catch (IOException e) {
-                    System.out.println("Write error!");
+                    logger.error("Write error!");
                     result = false;
                     break;
                 }
@@ -49,7 +50,7 @@ public class DepartmentFileDAO extends DepartmentDAO {
         List<String> lines = new ArrayList<>();
 
         if (departments.size() == 0) {
-            System.out.println("Error! Departments are exists");
+            logger.warn("Error! Departments are exists");
         } else {
             {
                 try {
@@ -57,7 +58,7 @@ public class DepartmentFileDAO extends DepartmentDAO {
                         lines.add(line);
                     }
                 } catch (IOException e) {
-                    System.out.println("Read error! " + e.getMessage());
+                    logger.error("Read error! " + e.getMessage());
                 }
             }
         }
@@ -68,7 +69,7 @@ public class DepartmentFileDAO extends DepartmentDAO {
         try {
             writer.close();
         } catch (IOException e) {
-            System.out.println("Close file error!");
+            logger.error("Close file error!");
         }
     }
 }

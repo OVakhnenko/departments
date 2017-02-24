@@ -12,6 +12,7 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 
+import static com.vakhnenko.departments.App.logger;
 import static com.vakhnenko.departments.utils.Constants.*;
 
 /**
@@ -28,7 +29,7 @@ public class DepartmentService {
 
     public void createDepartment(String name) {
         if (departmentDAO.exists(name)) {
-            System.out.println("Error! Department " + name + " already exists!");
+            logger.warn("Error! Department " + name + " already exists!");
         } else {
             departmentDAO.create(name);
         }
@@ -36,7 +37,7 @@ public class DepartmentService {
 
     public void createManager(String employeeName, String type, int age, String departmentName, String methodology) {
         if (employeeExists(employeeName)) {
-            System.out.println("Error! Manager " + employeeName + " already exists!");
+            logger.warn("Error! Manager " + employeeName + " already exists!");
         } else {
             employeeDAO.add(new Manager(employeeName, type, age, departmentName, methodology));
         }
@@ -44,7 +45,7 @@ public class DepartmentService {
 
     public void createDeveloper(String employeeName, String type, int age, String departmentName, String language) {
         if (employeeExists(employeeName)) {
-            System.out.println("Error! Developer " + employeeName + " already exists!");
+            logger.warn("Error! Developer " + employeeName + " already exists!");
         } else {
             employeeDAO.add(new Developer(employeeName, type, age, departmentName, language));
         }
@@ -54,7 +55,7 @@ public class DepartmentService {
         if (employeeExists(employeeName)) {
             employeeDAO.update(employeeName, age, departmentName, methodology, "");
         } else {
-            System.out.println("Error! Employee " + employeeName + " not found!");
+            logger.warn("Error! Employee " + employeeName + " not found!");
         }
     }
 
@@ -62,7 +63,7 @@ public class DepartmentService {
         if (employeeExists(employeeName)) {
             employeeDAO.update(employeeName, age, departmentName, "", language);
         } else {
-            System.out.println("Error! Employee " + employeeName + " not found!");
+            logger.warn("Error! Employee " + employeeName + " not found!");
         }
     }
 
@@ -70,7 +71,7 @@ public class DepartmentService {
         if (departmentExists(name)) {
             departmentDAO.delete(name);
         } else {
-            System.out.println("Error! Department " + name + " not found!");
+            logger.warn("Error! Department " + name + " not found!");
         }
     }
 
@@ -78,7 +79,7 @@ public class DepartmentService {
         if (employeeExists(name)) {
             employeeDAO.delete(name);
         } else {
-            System.out.println("Error! Employee " + name + " not found!");
+            logger.warn("Error! Employee " + name + " not found!");
         }
     }
 
@@ -108,7 +109,7 @@ public class DepartmentService {
                 System.out.println("All data saved successfully");
             }
         } else {
-            System.out.println("Data not been saved!");
+            logger.warn("Data not been saved!");
         }
     }
 
@@ -120,7 +121,7 @@ public class DepartmentService {
         if (employeeExists(employeeName)) {
             PrintEntity.printEmployee(employeeDAO.getByName(employeeName), USE_BR);
         } else {
-            System.out.println(employeeDAO.getEntityStatus() + " \"" + employeeName + "\" not found!");
+            logger.warn(employeeDAO.getEntityStatus() + " \"" + employeeName + "\" not found!");
         }
     }
 
@@ -153,7 +154,7 @@ public class DepartmentService {
 
         List<Department> departments = departmentDAO.getAll();
         if (departments.size() == 0) {
-            System.out.println("Error! No departments!");
+            logger.warn("Error! No departments!");
             return;
         }
 

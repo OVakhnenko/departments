@@ -86,8 +86,6 @@ public class Constants {
             + "select type from employee ";
     public static final String SELECT_ALL_FROM_DB_EMPLOYEE = ""
             + "select * from employee ";
-    public static final String SELECT_ALL_FROM_DB_EMPLOYEE_WO = ""
-            + "select * from employee order by department_name";
     public static final String SELECT_COUNT_FROM_DB_EMPLOYEE = ""
             + "select count(*) as count from employee ";
     public static final String CLOSING_STRUCTURE = ")";

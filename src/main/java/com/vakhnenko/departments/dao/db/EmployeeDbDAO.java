@@ -7,6 +7,7 @@ import com.vakhnenko.departments.entity.employee.*;
 import java.sql.*;
 import java.util.*;
 
+import static com.vakhnenko.departments.App.logger;
 import static com.vakhnenko.departments.utils.ConnectionUtilJDBC.*;
 import static com.vakhnenko.departments.utils.Constants.*;
 import static com.vakhnenko.departments.utils.Strings.*;
@@ -76,7 +77,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
             //
             statement.execute(query);
         } catch (SQLException e) {
-            System.out.println("MySQL error! " + query);
+            logger.error("MySQL error! " + query);
         }
     }
 
@@ -87,7 +88,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
         try {
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
     }
 
@@ -97,7 +98,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
         String result = "";
 
         if (!exists(employeeName)) {
-            System.out.println("Error! Employee " + employeeName + " not found!");
+            logger.warn("Error! Employee " + employeeName + " not found!");
         } else {
             try {
                 ResultSet rs = statement.executeQuery(query);
@@ -105,7 +106,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
                     result = rs.getString("type");
                 }
             } catch (SQLException e) {
-                System.out.println("MySQL query error! " + query);
+                logger.error("MySQL query error! " + query);
             }
         }
         return result;
@@ -128,7 +129,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
                 result.add(getByName(employeeName));
             }
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
         return result;
     }
@@ -150,7 +151,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
                 result.add(getByName(employeeName));
             }
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
         return result;
     }
@@ -173,7 +174,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
                 result.add(getByName(employeeName));
             }
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
         return result;
     }
@@ -202,7 +203,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
                 result = (T) (new Developer(name, type, age, department, language));
             }
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
         return result;
     }
@@ -218,7 +219,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
             if (rs.next())
                 result = true;
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
         return result;
     }
@@ -235,7 +236,7 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
                 result = rs.getInt("count");
             }
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
         return result;
     }
@@ -246,14 +247,14 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
             try {
                 statement.close();
             } catch (SQLException e) {
-                System.out.println("MySQL error! DB statement not close!");
+                logger.error("MySQL error! DB statement not close!");
             }
         }
         if (dbConnection != null) {
             try {
                 dbConnection.close();
             } catch (SQLException e) {
-                System.out.println("MySQL error! DB connection not close!");
+                logger.error("MySQL error! DB connection not close!");
             }
         }
     }

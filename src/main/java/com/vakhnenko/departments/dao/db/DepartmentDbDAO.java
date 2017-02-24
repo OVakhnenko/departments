@@ -5,6 +5,7 @@ import com.vakhnenko.departments.dao.file.DepartmentFileDAO;
 import com.vakhnenko.departments.entity.department.Department;
 import com.vakhnenko.departments.entity.employee.Employee;
 
+import static com.vakhnenko.departments.App.logger;
 import static com.vakhnenko.departments.utils.ConnectionUtilJDBC.*;
 import static com.vakhnenko.departments.utils.Constants.*;
 import static com.vakhnenko.departments.utils.Strings.*;
@@ -39,7 +40,7 @@ public class DepartmentDbDAO extends DepartmentDAO {
     @Override
     public void create(String name) {
         if (exists(name)) {
-            System.out.println("Error! Department " + name + " already exists!");
+            logger.warn("Error! Department " + name + " already exists!");
         } else {
             insertIntoDB(statement, INSERT_INTO_DB_DEPERTMENT + swq(name) + CLOSING_STRUCTURE);
         }
@@ -52,7 +53,7 @@ public class DepartmentDbDAO extends DepartmentDAO {
         try {
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
     }
 
@@ -66,7 +67,7 @@ public class DepartmentDbDAO extends DepartmentDAO {
             if (rs.next())
                 result = true;
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
         return result;
     }
@@ -82,7 +83,7 @@ public class DepartmentDbDAO extends DepartmentDAO {
                 result = new Department(name);
             }
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + query);
+            logger.error("MySQL query error! " + query);
         }
         return result;
     }
@@ -98,7 +99,7 @@ public class DepartmentDbDAO extends DepartmentDAO {
                 result.add(new Department(name));
             }
         } catch (SQLException e) {
-            System.out.println("MySQL query error! " + SELECT_NAME_FROM_DB_DEPARTMENT);
+            logger.error("MySQL query error! " + SELECT_NAME_FROM_DB_DEPARTMENT);
         }
         return result;
     }
@@ -109,14 +110,14 @@ public class DepartmentDbDAO extends DepartmentDAO {
             try {
                 statement.close();
             } catch (SQLException e) {
-                System.out.println("MySQL error! DB statement not close!");
+                logger.error("MySQL error! DB statement not close!");
             }
         }
         if (dbConnection != null) {
             try {
                 dbConnection.close();
             } catch (SQLException e) {
-                System.out.println("MySQL error! DB connection not close!");
+                logger.error("MySQL error! DB connection not close!");
             }
         }
     }

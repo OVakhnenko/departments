@@ -4,6 +4,8 @@ import com.vakhnenko.departments.entity.*;
 
 import java.util.*;
 
+import static com.vakhnenko.departments.App.logger;
+
 public abstract class EntityDAO<T extends Entity> extends DAO<T> {
     private String entityStatus = "";
     private List<T> list = new ArrayList<>();
@@ -18,7 +20,7 @@ public abstract class EntityDAO<T extends Entity> extends DAO<T> {
         T tmp;
 
         if ((tmp = search(name)) == null) {
-            System.out.println(getEntityStatus() + " \"" + name + "\" not found!");
+            logger.warn(getEntityStatus() + " \"" + name + "\" not found!");
         } else {
             System.out.println(getEntityStatus() + " \"" + name + "\" removed.");
             list.remove(tmp);

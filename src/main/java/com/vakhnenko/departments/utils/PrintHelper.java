@@ -1,5 +1,6 @@
 package com.vakhnenko.departments.utils;
 
+import static com.vakhnenko.departments.App.logger;
 import static com.vakhnenko.departments.utils.Arrays.*;
 
 public class PrintHelper {
@@ -38,7 +39,7 @@ public class PrintHelper {
     }
 
     public static void printSyntaxError(String[] commands) {
-        System.out.println("Syntax Error! - \"" + getAllArrayStrings(commands) + "\" type \"help\" for commands list");
+        logger.warn("Syntax Error! - \"" + getAllArrayStrings(commands) + "\" type \"help\" for commands list");
     }
 
     public static void printFirstScreen() {

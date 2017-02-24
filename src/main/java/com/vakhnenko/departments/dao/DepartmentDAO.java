@@ -3,6 +3,8 @@ package com.vakhnenko.departments.dao;
 import com.vakhnenko.departments.entity.*;
 import com.vakhnenko.departments.entity.department.*;
 
+import static com.vakhnenko.departments.App.logger;
+
 public class DepartmentDAO extends EntityDAO<Department> {
 
     public DepartmentDAO() {
@@ -11,7 +13,7 @@ public class DepartmentDAO extends EntityDAO<Department> {
 
     public void create(String name) {
         if (search(name) != null) {
-            System.out.println("Department  \"" + name + "\" already exists");
+            logger.warn("Department  \"" + name + "\" already exists");
         } else {
             add(new Department(name));
         }
