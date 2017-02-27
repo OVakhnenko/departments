@@ -106,7 +106,7 @@ public class DepartmentService {
     public void saveToFile() {
         if (departmentDAO.save()) {
             if (employeeDAO.save()) {
-                System.out.println("All data saved successfully");
+                logger.info("All data saved successfully");
             }
         } else {
             logger.warn("Data not been saved!");
@@ -126,12 +126,12 @@ public class DepartmentService {
     }
 
     public void printAllDepartments() {
-        System.out.println("Departmnents:");
+        logger.info("Departmnents:");
         PrintEntity.printAllDepartments(departmentDAO.getAll());
     }
 
     public void printAllEmployee(String department) {
-        System.out.println("Employees of departmnent " + department + ":");
+        logger.info("Employees of departmnent " + department + ":");
         PrintEntity.printAllEmployee(employeeDAO.getAll(department));
     }
 
@@ -167,15 +167,15 @@ public class DepartmentService {
         }
 
         if (max > 0) {
-            System.out.println("Department " + department + " has " + max + ((type.equals("D")) ? " developers" : " managers"));
+            logger.info("Department " + department + " has " + max + ((type.equals("D")) ? " developers" : " managers"));
         } else {
-            System.out.println("Department's is not have any " + ((type.equals("D")) ? " developers" : " managers"));
+            logger.info("Department's is not have any " + ((type.equals("D")) ? " developers" : " managers"));
         }
     }
 
     public void done() {
         departmentDAO.done();
         employeeDAO.done();
-        System.out.println("Bye!");
+        logger.info("Bye!");
     }
 }

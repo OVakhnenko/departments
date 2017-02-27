@@ -54,7 +54,7 @@ public abstract class ConnectionUtilJDBC {
             } else {
                 Statement statement = dbConnection.createStatement();
                 statement.execute(createStatement);
-                System.out.println("Table \"" + bdName + "\" is created or exists!");
+                logger.info("Table \"" + bdName + "\" is created or exists!");
                 result = true;
             }
         } catch (SQLException e) {

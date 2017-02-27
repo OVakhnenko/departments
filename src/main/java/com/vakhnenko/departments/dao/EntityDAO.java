@@ -22,7 +22,7 @@ public abstract class EntityDAO<T extends Entity> extends DAO<T> {
         if ((tmp = search(name)) == null) {
             logger.warn(getEntityStatus() + " \"" + name + "\" not found!");
         } else {
-            System.out.println(getEntityStatus() + " \"" + name + "\" removed.");
+            logger.info(getEntityStatus() + " \"" + name + "\" removed.");
             list.remove(tmp);
         }
     }

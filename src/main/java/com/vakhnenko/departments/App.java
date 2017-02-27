@@ -9,13 +9,10 @@ public class App {
         DepartmentsApplication departments = new DepartmentsApplication();
 
         try {
-            //logger.info("departments run");
             departments.run();
         } catch (Exception e) {
-            logger.error("departments error ", e);
-            System.out.println("Application error! " + e.getMessage());
+            logger.error("Application error ", e);
         } finally {
-            //logger.info("departments done");
             departments.done();
         }
     }

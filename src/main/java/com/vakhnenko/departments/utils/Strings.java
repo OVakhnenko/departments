@@ -1,14 +1,16 @@
 package com.vakhnenko.departments.utils;
 
+import static com.vakhnenko.departments.App.logger;
+
 public class Strings {
     public static String swq(String str) { // Strings With Quotes
         return "'" + str + "' ";
     }
 
-    public static void printStringSetLength(String str, int length) {
+    public static String makeStringLength(String str, int length) {
         StringBuffer buffer = new StringBuffer(str);
         buffer.setLength(length);
-        System.out.print("" + buffer);
+        return ("" + buffer);
     }
 
     public static String shrink(String command) {

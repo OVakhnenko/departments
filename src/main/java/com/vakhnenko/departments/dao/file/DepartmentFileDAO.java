@@ -26,7 +26,7 @@ public class DepartmentFileDAO extends DepartmentDAO {
         List<Department> departments = getAll();
 
         if (departments.size() == 0) {
-            System.out.println("Error! No departments");
+            logger.info("Error! No departments");
         } else {
             for (Department department : departments) {
                 try {
