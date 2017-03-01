@@ -60,6 +60,7 @@ public class Constants {
             + "name varchar(20) not null,"
             + "age tinyint not null,"
             + "type varchar(1) not null,"
+            + "department_id int not null,"
             + "department_name varchar(25) not null,"
             + "methodology varchar(20) not null default '',"
             + "language varchar(20) not null default '' ,"

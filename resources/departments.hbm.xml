@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.vakhnenko.departments.entity.department.Department" table="department">
+        <id name="departmentID" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <set name="employees" cascade="all">
+            <key column="department_id"/>
+            <one-to-many class="com.vakhnenko.departments.entity.employee.Employee"/>
+        </set>
+        <property name="name" column="name" type="string"/>
+    </class>
+
+    <class name="com.vakhnenko.departments.entity.employee.Employee" table="employee">
+        <id name="employeeID" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="age" column="age" type="int"/>
+        <property name="type" column="type" type="string"/>
+        <property name="department_id" column="department_id" type="int"/>
+        <property name="department" column="department_name" type="string"/>
+        <property name="methodology" column="methodology" type="string"/>
+        <property name="language" column="language" type="string"/>
+    </class>
+</hibernate-mapping>
+

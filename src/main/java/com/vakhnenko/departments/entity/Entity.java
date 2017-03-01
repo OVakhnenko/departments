@@ -4,6 +4,9 @@ public abstract class Entity {
     private int ID;
     private String name;
 
+    public Entity() {
+    }
+
     public Entity(String name) {
         this.name = name;
         this.ID = getUniqeID();

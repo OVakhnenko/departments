@@ -3,6 +3,8 @@ package com.vakhnenko.departments.service;
 import com.vakhnenko.departments.dao.*;
 import com.vakhnenko.departments.dao.file.*;
 import com.vakhnenko.departments.dao.db.*;
+import com.vakhnenko.departments.dao.hibernate.DepartmentHibernateDAO;
+import com.vakhnenko.departments.dao.hibernate.EmployeeHibernateDAO;
 import com.vakhnenko.departments.entity.department.*;
 import com.vakhnenko.departments.entity.employee.*;
 import com.vakhnenko.departments.entity.*;
@@ -19,10 +21,15 @@ import static com.vakhnenko.departments.utils.Constants.*;
  * Created for practice on 09.02.2017 21:07
  */
 public class DepartmentService {
+    // file
     //private DepartmentDAO departmentDAO = new DepartmentFileDAO(ConnectionUtilFile.getFileConnectionWriter());
     //private EmployeeDAO<Employee> employeeDAO = new EmployeeFileDAO(ConnectionUtilFile.getFileConnectionWriter());
-    private DepartmentDAO departmentDAO = new DepartmentDbDAO(ConnectionUtilJDBC.getDBConnection());
-    private EmployeeDAO<Employee> employeeDAO = new EmployeeDbDAO(ConnectionUtilJDBC.getDBConnection());
+    // db
+    //private DepartmentDAO departmentDAO = new DepartmentDbDAO(ConnectionUtilJDBC.getDBConnection());
+    //private EmployeeDAO<Employee> employeeDAO = new EmployeeDbDAO(ConnectionUtilJDBC.getDBConnection());
+    // hibernate
+    private DepartmentDAO departmentDAO = new DepartmentHibernateDAO(ConnectionUtilHibernate.getSessionFactory());
+    private EmployeeDAO<Employee> employeeDAO = new EmployeeHibernateDAO(ConnectionUtilHibernate.getSessionFactory());
 
     public DepartmentService() throws SQLException {
     }
