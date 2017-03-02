@@ -2,17 +2,13 @@ package com.vakhnenko.departments.dao.hibernate;
 
 import com.vakhnenko.departments.dao.DepartmentDAO;
 import com.vakhnenko.departments.entity.department.Department;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.sql.*;
 import java.util.*;
 
 import static com.vakhnenko.departments.App.logger;
-import static com.vakhnenko.departments.utils.Constants.*;
-import static com.vakhnenko.departments.utils.Strings.swq;
 
 /**
  * Created for departments on 01.03.2017 9:30.
