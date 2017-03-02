@@ -44,14 +44,14 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
                     + swq(Integer.toString(employee.getAge())) + ","
                     + swq(type) + ","
                     + swq(employee.getDepartment()) + ","
-                    + swq(((Manager) employee).getMethodology()) + CLOSING_STRUCTURE);
+                    + swq(employee.getMethodology()) + CLOSING_STRUCTURE);
         } else {
             insertIntoDB(statement, INSERT_INTO_DB_DEVELOPER
                     + swq(employee.getName()) + ","
                     + swq(Integer.toString(employee.getAge())) + ","
                     + swq(type) + ","
                     + swq(employee.getDepartment()) + ","
-                    + swq(((Developer) employee).getLanguage()) + CLOSING_STRUCTURE);
+                    + swq(employee.getLanguage()) + CLOSING_STRUCTURE);
         }
     }
 
@@ -73,8 +73,6 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
     private void updateEmployee(String updateQuery, String employeeName) {
         String query = UPDATE_EMPLOYEE_DB_EMPLOYEE + updateQuery + WHERE_NAME_IS_EQUAL + employeeName;
         try {
-            //employeeDAO.save(new Employee(id, name, age ....))
-            //
             statement.execute(query);
         } catch (SQLException e) {
             logger.error("MySQL error! " + query);
@@ -197,17 +195,16 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
             department = rs.getString("department_name");
             if (type.equals(EMPLOYEE_MANAGER_TYPE)) {
                 methodology = rs.getString("methodology");
-                result = (T) (new Manager(name, type, age, department, methodology));
+                result = (T) (new Employee(name, type, age, department, "", methodology));
             } else {
                 language = rs.getString("language");
-                result = (T) (new Developer(name, type, age, department, language));
+                result = (T) (new Employee(name, type, age, department, language, ""));
             }
         } catch (SQLException e) {
             logger.error("MySQL query error! " + query);
         }
         return result;
     }
-
 
     @Override
     public boolean exists(String name) {

@@ -43,6 +43,10 @@ public class DepartmentsApplication {
         readCommand("create -e -n Ivan3 Ivanovich6 -t d -a 23 -l Java -dn 222 2222 22222");
         readCommand("create -e -n Ivan3 Ivanovich7 -t d -a 23 -l Java -dn 222 2222 22222");
         readCommand("create -e -n Ivan3 Ivanovich8 -t d -a 23 -l Java -dn 222 2222 22222");
+        readCommand("create -d *** **** *****");
+        readCommand("create -e -n ***** ********** -t d -a 11 -l **** -dn *** **** *****");
+        readCommand("rm -d *** **** *****");
+        readCommand("rm -e ***** **********");
         readCommand("departments");
         readCommand("open -d 222 2222 22222");
         readCommand("open -e Ivan1 Ivanovich1");

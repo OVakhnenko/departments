@@ -46,7 +46,7 @@ public class DepartmentService {
         if (employeeExists(employeeName)) {
             logger.warn("Error! Manager " + employeeName + " already exists!");
         } else {
-            employeeDAO.add(new Manager(employeeName, type, age, departmentName, methodology));
+            employeeDAO.add(new Employee(employeeName, type, age, departmentName, "", methodology));
         }
     }
 
@@ -54,7 +54,7 @@ public class DepartmentService {
         if (employeeExists(employeeName)) {
             logger.warn("Error! Developer " + employeeName + " already exists!");
         } else {
-            employeeDAO.add(new Developer(employeeName, type, age, departmentName, language));
+            employeeDAO.add(new Employee(employeeName, type, age, departmentName, language, ""));
         }
     }
 

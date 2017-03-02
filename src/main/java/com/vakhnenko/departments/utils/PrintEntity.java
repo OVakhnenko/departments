@@ -46,26 +46,29 @@ public class PrintEntity {
     }
 
     public static void printEmployee(Employee employee, boolean use_br) {
+        String type = employee.getType();
+        boolean isManager = type.equals(EMPLOYEE_MANAGER_TYPE);
+
         if (use_br) {
             logger.info("Name " + employee.getName());
-            logger.info("ID " + employee.getID());
+            logger.info("ID " + employee.getEmployeeID());
             logger.info("Age " + employee.getAge());
             logger.info("Dep " + employee.getDepartment());
 
-            if (employee.getClass().getName().equals("com.vakhnenko.departments.entity.employee.Manager")) {
-                logger.info("Type (" + employee.getType() + ") - MANAGER");
-                logger.info("Meth " + ((Manager) employee).getMethodology());
-            } else if (employee.getClass().getName().equals("com.vakhnenko.departments.entity.employee.Developer")) {
-                logger.info("Type (" + employee.getType() + ") - DEVELOPER ");
-                logger.info("Lang " + ((Developer) employee).getLanguage());
+            if (isManager) {
+                logger.info("Type (M) - MANAGER");
+                logger.info("Meth " + employee.getMethodology());
+            } else {
+                logger.info("Type (D) - DEVELOPER ");
+                logger.info("Lang " + employee.getLanguage());
             }
         } else {
             String tmpString = "Name " + employee.getName() + " ID " + employee.getID() +
                     " Age " + employee.getAge() + " Dep " + employee.getDepartment();
-            if (employee.getClass().getName().equals("com.vakhnenko.departments.entity.employee.Manager")) {
-                tmpString += " Type (" + employee.getType() + ") - MANAGER Meth " + ((Manager) employee).getMethodology();
-            } else if (employee.getClass().getName().equals("com.vakhnenko.departments.entity.employee.Developer")) {
-                tmpString += " Type (" + employee.getType() + ") - DEVELOPER  Lang " + ((Developer) employee).getLanguage();
+            if (isManager) {
+                tmpString += " Type (M) - MANAGER Meth " + employee.getMethodology();
+            } else {
+                tmpString += " Type (D) - DEVELOPER  Lang " + employee.getLanguage();
             }
             logger.info(tmpString);
         }

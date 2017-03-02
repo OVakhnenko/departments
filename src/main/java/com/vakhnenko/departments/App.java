@@ -11,7 +11,7 @@ public class App {
         try {
             departments.run();
         } catch (Exception e) {
-            logger.error("Application error ", e);
+            logger.error("Application error!", e);
         } finally {
             departments.done();
         }

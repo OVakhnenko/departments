@@ -25,8 +25,8 @@ public class EmployeeFileDAO<T extends Employee> extends EmployeeDAO<T> {
         if (employee != null) {
             if (age > 0) employee.setAge(age);
             if (!departmentName.equals("")) employee.setDepartment(departmentName);
-            if (!methodology.equals("")) ((Manager) employee).setMethodology(methodology);
-            if (!language.equals("")) ((Developer) employee).setLanguage(language);
+            if (!methodology.equals("")) employee.setMethodology(methodology);
+            if (!language.equals("")) employee.setLanguage(language);
         } else {
             logger.warn("Error! Employee " + employeeName + " not founf!");
         }
@@ -48,9 +48,9 @@ public class EmployeeFileDAO<T extends Employee> extends EmployeeDAO<T> {
                     writer.write(DEPARTMENT_EMPLOYEE_KEY + " " + employee.getDepartment() + " ");
 
                     if (type.equals(EMPLOYEE_MANAGER_TYPE)) {
-                        writer.write(METHODOLOGY_EMPLOYEE_KEY + " " + ((Manager) employee).getMethodology() + " ");
+                        writer.write(METHODOLOGY_EMPLOYEE_KEY + " " + employee.getMethodology() + " ");
                     } else {
-                        writer.write(LANGUAGE_EMPLOYEE_KEY + " " + ((Developer) employee).getLanguage() + " ");
+                        writer.write(LANGUAGE_EMPLOYEE_KEY + " " + employee.getLanguage() + " ");
                     }
                     writer.write("\n");
                     writer.flush();

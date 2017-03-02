@@ -43,6 +43,14 @@ public abstract class EntityDAO<T extends Entity> extends DAO<T> {
         return search(name) != null;
     }
 
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
+    }
+
     @Override
     public int getSize() {
         return list.size();
