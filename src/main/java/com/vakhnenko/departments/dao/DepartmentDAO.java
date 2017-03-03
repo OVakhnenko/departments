@@ -1,11 +1,10 @@
 package com.vakhnenko.departments.dao;
 
-import com.vakhnenko.departments.entity.*;
-import com.vakhnenko.departments.entity.department.*;
+import com.vakhnenko.departments.entity.department.Department;
 
 import static com.vakhnenko.departments.App.logger;
 
-public class DepartmentDAO extends EntityDAO<Department> {
+public abstract class DepartmentDAO extends EntityDAO<Department> {
 
     public DepartmentDAO() {
         setEntityStatus("Department");

@@ -1,12 +1,11 @@
 package com.vakhnenko.departments.dao;
 
-import com.vakhnenko.departments.entity.*;
 import com.vakhnenko.departments.entity.employee.Employee;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class EmployeeDAO<T extends Entity> extends EntityDAO<T> {
-
+public abstract class EmployeeDAO extends EntityDAO<Employee> {
     public EmployeeDAO() {
         setEntityStatus("Employee");
     }
@@ -18,26 +17,26 @@ public class EmployeeDAO<T extends Entity> extends EntityDAO<T> {
         return ((Employee) search(employeeName)).getType();
     }
 
-    public T getByName(String name) {
+    public Employee getByName(String name) {
         return search(name);
     }
 
-    public List<T> getAll(String departmentName) {
-        List<T> result = new ArrayList<>();
+    public List<Employee> getAll(String departmentName) {
+        List<Employee> result = new ArrayList<>();
 
-        for (T list : getAll()) {
-            if (((Employee) list).getDepartment().equals(departmentName)) {
+        for (Employee list : getAll()) {
+            if ((list).getDepartment().equals(departmentName)) {
                 result.add(list);
             }
         }
         return result;
     }
 
-    public List<T> getAll(String departmentName, int age) {
-        List<T> result = new ArrayList<>();
+    public List<Employee> getAll(String departmentName, int age) {
+        List<Employee> result = new ArrayList<>();
 
-        for (T list : getAll()) {
-            if (((Employee) list).getDepartment().equals(departmentName) && (((Employee) list).getAge() == age)) {
+        for (Employee list : getAll()) {
+            if ((list).getDepartment().equals(departmentName) && ((list).getAge() == age)) {
                 result.add(list);
             }
         }
