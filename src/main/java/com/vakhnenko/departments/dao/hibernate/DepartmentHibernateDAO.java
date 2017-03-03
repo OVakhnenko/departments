@@ -2,6 +2,7 @@ package com.vakhnenko.departments.dao.hibernate;
 
 import com.vakhnenko.departments.dao.DepartmentDAO;
 import com.vakhnenko.departments.entity.department.Department;
+import com.vakhnenko.departments.entity.employee.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -59,8 +60,17 @@ public class DepartmentHibernateDAO extends DepartmentDAO {
         if (openSession()) {
             try {
                 Department department = session.get(Department.class, departmentID);
+                Set<Employee> employees = department.getEmployees();
+
+                for (Employee employee : employees) {
+                    session.delete(employee);
+                }
                 session.delete(department);
                 transaction.commit();
+
+                for (Employee employee : employees) {
+                    logger.warn("Employee " + employee.getName() + " deleted!");
+                }
                 logger.warn("Department " + name + " deleted!");
             } catch (Exception e) {
                 logger.error("Hibernate query error! " + e.getMessage());

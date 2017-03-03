@@ -8,7 +8,7 @@
         <id name="departmentID" type="int" column="id">
             <generator class="native"/>
         </id>
-        <set name="employees" cascade="all">
+        <set name="employees" cascade="all" lazy="true">
             <key column="department_id"/>
             <one-to-many class="com.vakhnenko.departments.entity.employee.Employee"/>
         </set>

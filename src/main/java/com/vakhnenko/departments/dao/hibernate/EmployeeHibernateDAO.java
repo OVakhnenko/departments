@@ -1,6 +1,7 @@
 package com.vakhnenko.departments.dao.hibernate;
 
 import com.vakhnenko.departments.dao.EmployeeDAO;
+import com.vakhnenko.departments.entity.department.Department;
 import com.vakhnenko.departments.entity.employee.Employee;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -8,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.Set;
 
 import static com.vakhnenko.departments.App.logger;
 
@@ -35,6 +37,7 @@ public class EmployeeHibernateDAO extends EmployeeDAO<Employee> {
 
     @Override
     public void add(Employee employee) {
+        int departmentID = getDepartmentID(employee.getDepartment());
         String name = employee.getName();
 
         if (exists(name)) {
@@ -43,6 +46,7 @@ public class EmployeeHibernateDAO extends EmployeeDAO<Employee> {
             if (openSession()) {
                 try {
                     transaction = session.beginTransaction();
+                    employee.setDepartment_id(departmentID);
                     int employeeID = Integer.valueOf(String.valueOf(session.save(employee))).intValue(); //serializable to int
                     transaction.commit();
                 } catch (Exception e) {
@@ -115,6 +119,28 @@ public class EmployeeHibernateDAO extends EmployeeDAO<Employee> {
     private int getID(String name) {
         exists(name);
         return search(name).getEmployeeID();
+    }
+
+    private int getDepartmentID(String name) {
+        int result = -1;
+        List<Department> departments;
+
+        if (openSession()) {
+            try {
+                Query query = session.createQuery("from Department where name = :paramDepartmentName");
+                query.setParameter("paramDepartmentName", name);
+                departments = query.list();
+                if (departments.size() > 0) {
+                    result = departments.get(0).getDepartmentID();
+                }
+            } catch (Exception e) {
+                logger.error("Hibernate query error! " + e.getMessage());
+                return -2;
+            } finally {
+                closeSession();
+            }
+        }
+        return result;
     }
 
     @Override

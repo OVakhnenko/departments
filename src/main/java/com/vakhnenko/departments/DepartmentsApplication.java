@@ -26,10 +26,11 @@ public class DepartmentsApplication {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         printFirstScreen();
 
-        while (noExit) {
+        /*while (noExit) {
             command = reader.readLine();
             noExit = readCommand(command);
-        }
+        }*/
+
         /*readCommand("create -d 111 1111 11111");
         readCommand("create -d 111 1111 11111");
         readCommand("create -d 222 2222 22222");
@@ -42,12 +43,16 @@ public class DepartmentsApplication {
         readCommand("create -e -n Ivan2 Ivanovich5 -t d -a 22 -l Java -dn 222 2222 22222");
         readCommand("create -e -n Ivan3 Ivanovich6 -t d -a 23 -l Java -dn 222 2222 22222");
         readCommand("create -e -n Ivan3 Ivanovich7 -t d -a 23 -l Java -dn 222 2222 22222");
-        readCommand("create -e -n Ivan3 Ivanovich8 -t d -a 23 -l Java -dn 222 2222 22222");
-        readCommand("create -d *** **** *****");
+        readCommand("create -e -n Ivan3 Ivanovich8 -t d -a 23 -l Java -dn 222 2222 22222");*/
         readCommand("create -e -n ***** ********** -t d -a 11 -l **** -dn *** **** *****");
-        readCommand("rm -d *** **** *****");
+        readCommand("create -d *** **** *****");
+        readCommand("create -e -n ***** *********1 -t d -a 11 -l **** -dn *** **** *****");
+        readCommand("create -e -n ***** *********2 -t d -a 11 -l **** -dn *** **** *****");
+        readCommand("create -e -n ***** *********3 -t d -a 11 -l **** -dn *** **** *****");
+        readCommand("create -e -n ***** ********** -t d -a 11 -l **** -dn *** **** *****");
         readCommand("rm -e ***** **********");
-        readCommand("departments");
+        readCommand("rm -d *** **** *****");
+        /*readCommand("departments");
         readCommand("open -d 222 2222 22222");
         readCommand("open -e Ivan1 Ivanovich1");
         readCommand("update -e -n Ivan3 Ivanovich3 -a 35 -m Scrum3 -dn 222 2222 22222");

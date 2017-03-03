@@ -16,14 +16,22 @@ import static com.vakhnenko.departments.utils.Strings.*;
 public class PrintEntity {
 
     public static void printAllDepartments(List<Department> departments) {
-        for (Department department : departments) {
-            logger.info(department.getName());
+        if (departments.size() > 0) {
+            for (Department department : departments) {
+                logger.info(department.getName());
+            }
+        } else {
+            logger.info("No departments.");
         }
     }
 
     public static void printAllEmployee(List<Employee> employees) {
-        for (Employee employee : employees) {
-            printEmployee(employee, NOT_USE_BR);
+        if (employees.size() > 0) {
+            for (Employee employee : employees) {
+                printEmployee(employee, NOT_USE_BR);
+            }
+        } else {
+            logger.info("No employees.");
         }
     }
 
@@ -63,7 +71,7 @@ public class PrintEntity {
                 logger.info("Lang " + employee.getLanguage());
             }
         } else {
-            String tmpString = "Name " + employee.getName() + " ID " + employee.getID() +
+            String tmpString = "Name " + employee.getName() + " ID " + employee.getEmployeeID() +
                     " Age " + employee.getAge() + " Dep " + employee.getDepartment();
             if (isManager) {
                 tmpString += " Type (M) - MANAGER Meth " + employee.getMethodology();
