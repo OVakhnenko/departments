@@ -23,10 +23,10 @@ import static com.vakhnenko.departments.utils.Constants.*;
 public class DepartmentService {
     // file
     //private DepartmentDAO departmentDAO = new DepartmentFileDAO(ConnectionUtilFile.getFileConnectionWriter());
-    //private EmployeeDAO<Employee> employeeDAO = new EmployeeFileDAO(ConnectionUtilFile.getFileConnectionWriter());
+    //private EmployeeDAO employeeDAO = new EmployeeFileDAO(ConnectionUtilFile.getFileConnectionWriter());
     // db
     //private DepartmentDAO departmentDAO = new DepartmentDbDAO(ConnectionUtilJDBC.getDBConnection());
-    //private EmployeeDAO<Employee> employeeDAO = new EmployeeDbDAO(ConnectionUtilJDBC.getDBConnection());
+    //private EmployeeDAO employeeDAO = new EmployeeDbDAO(ConnectionUtilJDBC.getDBConnection());
     // hibernate
     private DepartmentDAO departmentDAO = new DepartmentHibernateDAO(ConnectionUtilHibernate.getSessionFactory());
     private EmployeeDAO employeeDAO = new EmployeeHibernateDAO(ConnectionUtilHibernate.getSessionFactory());
