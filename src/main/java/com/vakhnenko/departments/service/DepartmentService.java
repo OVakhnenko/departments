@@ -29,7 +29,7 @@ public class DepartmentService {
     //private EmployeeDAO<Employee> employeeDAO = new EmployeeDbDAO(ConnectionUtilJDBC.getDBConnection());
     // hibernate
     private DepartmentDAO departmentDAO = new DepartmentHibernateDAO(ConnectionUtilHibernate.getSessionFactory());
-    private EmployeeDAO<Employee> employeeDAO = new EmployeeHibernateDAO(ConnectionUtilHibernate.getSessionFactory());
+    private EmployeeDAO employeeDAO = new EmployeeHibernateDAO(ConnectionUtilHibernate.getSessionFactory());
 
     public DepartmentService() throws SQLException {
     }
