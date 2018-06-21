@@ -1,21 +1,24 @@
 package com.vakhnenko.departments.dao.db;
 
 import com.vakhnenko.departments.dao.EmployeeDAO;
-import com.vakhnenko.departments.dao.file.EmployeeFileDAO;
-import com.vakhnenko.departments.entity.employee.*;
+import com.vakhnenko.departments.entity.employee.Employee;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.vakhnenko.departments.App.logger;
-import static com.vakhnenko.departments.utils.ConnectionUtilJDBC.*;
+import static com.vakhnenko.departments.utils.ConnectionUtilJDBC.insertIntoDB;
 import static com.vakhnenko.departments.utils.Constants.*;
-import static com.vakhnenko.departments.utils.Strings.*;
+import static com.vakhnenko.departments.utils.Strings.swq;
 
 /**
  * Created for practice on 10.02.2017 10:21
  */
-public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
+public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO {
     private Connection dbConnection;
     private Statement statement;
 
@@ -111,10 +114,10 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
     }
 
     @Override
-    public List<T> getAll() {
+    public List<Employee> getAll() {
         String name;
         String query = SELECT_ALL_FROM_DB_EMPLOYEE;
-        List<T> result = new ArrayList<>();
+        List<Employee> result = new ArrayList<>();
         List<String> names = new ArrayList<>();
 
         try {
@@ -133,9 +136,9 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
     }
 
     @Override
-    public List<T> getAll(String departmentName) {
+    public List<Employee> getAll(String departmentName) {
         String query = SELECT_ALL_FROM_DB_EMPLOYEE + WHERE_DEPARTMENT_NAME_IS_EQUAL + swq(departmentName);
-        List<T> result = new ArrayList<>();
+        List<Employee> result = new ArrayList<>();
         List<String> names = new ArrayList<>();
         String name;
 
@@ -155,10 +158,10 @@ public class EmployeeDbDAO<T extends Employee> extends EmployeeDAO<T> {
     }
 
     @Override
-    public List<T> getAll(String departmentName, int age) {
+    public List<Employee> getAll(String departmentName, int age) {
         String query = SELECT_ALL_FROM_DB_EMPLOYEE + WHERE_AGE_IS_EQUAL + age + " AND "
                 + DEPARTMENT_IS_EQUAL + swq(departmentName);
-        List<T> result = new ArrayList<>();
+        List<Employee> result = new ArrayList<>();
         List<String> names = new ArrayList<>();
         String name;
 

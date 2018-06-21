@@ -1,9 +1,10 @@
 package com.vakhnenko.departments.dao.file;
 
-import com.vakhnenko.departments.dao.*;
-import com.vakhnenko.departments.entity.employee.*;
+import com.vakhnenko.departments.dao.EmployeeDAO;
+import com.vakhnenko.departments.entity.employee.Employee;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import static com.vakhnenko.departments.App.logger;
@@ -12,7 +13,7 @@ import static com.vakhnenko.departments.utils.Constants.*;
 /**
  * Created for practice on 10.02.2017 9:36
  */
-public class EmployeeFileDAO<T extends Employee> extends EmployeeDAO<T> {
+public class EmployeeFileDAO<T extends Employee> extends EmployeeDAO {
     private FileWriter writer;
 
     public EmployeeFileDAO(FileWriter writer) {
@@ -35,7 +36,7 @@ public class EmployeeFileDAO<T extends Employee> extends EmployeeDAO<T> {
     public boolean save() {
         boolean result = false;
         String type;
-        List<T> employees = getAll();
+        List<Employee> employees = getAll();
 
         if (employees.size() == 0) {
             result = true;

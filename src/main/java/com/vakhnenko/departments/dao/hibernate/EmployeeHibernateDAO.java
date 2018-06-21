@@ -9,14 +9,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.vakhnenko.departments.App.logger;
 
 /**
  * Created for departments on 01.03.2017 9:34.
  */
-public class EmployeeHibernateDAO extends EmployeeDAO<Employee> {
+public class EmployeeHibernateDAO extends EmployeeDAO {
     private SessionFactory sessionFactory;
     private Session session;
     private Transaction transaction;
